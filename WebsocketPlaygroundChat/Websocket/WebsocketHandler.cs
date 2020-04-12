@@ -49,7 +49,6 @@ namespace WebsocketPlaygroundChat.Websocket
             return null;
         }
 
-
         private async Task SendMessageToSockets(string message)
         {
             IEnumerable<SocketConnection> toSentTo;

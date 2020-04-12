@@ -20,7 +20,6 @@ namespace MyApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-
             services.AddSingleton<IWebsocketHandler, WebsocketHandler>();
         }
 

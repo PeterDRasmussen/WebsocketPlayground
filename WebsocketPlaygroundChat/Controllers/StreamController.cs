@@ -16,11 +16,9 @@ namespace MyApplication.Controllers
             WebsocketHandler = websocketHandler;
         }
 
-
         [HttpGet]
         public async Task Get()
         {
-
             var context = ControllerContext.HttpContext;
             var isSocketRequest = context.WebSockets.IsWebSocketRequest;
 

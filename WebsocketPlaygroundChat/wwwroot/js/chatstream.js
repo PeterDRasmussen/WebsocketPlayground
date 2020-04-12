@@ -1,8 +1,8 @@
-﻿(function() {
+﻿(function () {
     let webSocket
     var getWebSocketMessages = function (onMessageReceived)
     {
-        let url = `ws://${location.host}/api/stream`
+        let url = `ws://${location.host}/api/stream`;
         console.log('url is: ' + url);
 
         webSocket = new WebSocket(url);
@@ -24,5 +24,4 @@
         webSocket.send(text);
         textElement.value = '';
     });
-	
 }());
