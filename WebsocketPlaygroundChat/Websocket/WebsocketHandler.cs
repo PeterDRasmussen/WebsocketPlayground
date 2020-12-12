@@ -60,9 +60,11 @@ namespace WebsocketPlaygroundChat.Websocket
 
             var tasks = toSentTo.Select(async websocketConnection =>
             {
-                var bytes = Encoding.Default.GetBytes(message);
-                var arraySegment = new ArraySegment<byte>(bytes);
-                await websocketConnection.WebSocket.SendAsync(arraySegment, WebSocketMessageType.Text, true, CancellationToken.None);
+                if (websocketConnection.WebSocket.State == WebSocketState.Open) { 
+                   var bytes = Encoding.Default.GetBytes(message);
+                   var arraySegment = new ArraySegment<byte>(bytes);
+                   await websocketConnection.WebSocket.SendAsync(arraySegment, WebSocketMessageType.Text, true, CancellationToken.None);
+                }
             });
             await Task.WhenAll(tasks);
         }
@@ -87,11 +89,11 @@ namespace WebsocketPlaygroundChat.Websocket
                     foreach (var closedWebsocketConnection in closedSockets)
                     {
                         await SendMessageToSockets($"User with id <b>{closedWebsocketConnection.Id}</b> has left the chat");
-                        await closedWebsocketConnection.WebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "socket is closed", CancellationToken.None);
                     }
-
+                    
                     await Task.Delay(5000);
                 }
+                    
             });
         }
 
